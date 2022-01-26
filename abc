@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+struct Complex
+{
+	float real;
+	float imag;
+	Complex operator +(Complex cc)
+	{
+		Complex result;
+		result.real = real + cc.real;
+		result.imag = imag + cc.imag;
+		return result;
+	}
+	Complex operator -(Complex cc)
+	{
+		Complex result;
+		result.real = real - cc.real;
+		result.imag = imag - cc.imag;
+		return result;
+	}
+	float C_mag(Complex cc)
+	{
+		float result;
+		result = sqrt(pow(cc.real, 2) + pow(cc.imag, 2));
+		return result;
+	}
+	bool operator >=(Complex cc)
+	{
+		float mag1, mag2;
+		mag1 = sqrt(pow(real, 2) + pow(imag, 2));
+		mag2 = C_mag(cc);
+		if (mag1 >= mag2)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+};
+Complex input();          //function to read a complex varaible from the user
+void PrintC(Complex);      // function to print a complex varaible
+float C_mag(Complex cc);   // function for calculation of magnitude of a complex number
+
+int main()
+{
+	char op = 'y';
+	while (op == 'y')
+	{
+		Complex c1, c2, c3;
+		cout << "Enter the first complex number : " << endl;
+		c1 = input();
+		PrintC(c1);
+		cout << "Enter the second complex number : " << endl;
+		c2 = input();
+		PrintC(c2);
+		c3 = c1 + c2;
+		cout << "The Sum of  Complex number is  ";
+		PrintC(c3);
+		c3 = c1 - c2;
+		cout << "The Difference of the Complex numbers is : ";
+		PrintC(c3);
+		if (c1 >= c2)
+		{
+			cout << "c1 is greater than c2. " << endl;
+		}
+		else
+		{
+			cout << " c1 is less than the c2." << endl;
+		}
+		cout << "Do you want to continue(y/n).\n";
+		cin >> op;
+	}
+		return 0;
+}
+Complex input()
+{
+	Complex cc;
+	cout << "Enter the real part : ";
+	cin >> cc.real;
+	cout << "Enter the complex part : ";
+	cin >> cc.imag;
+	return cc;
+}
+void PrintC(Complex cc)
+{
+	cout << cc.real << "+(" << cc.imag << ")i" << endl;
+}
